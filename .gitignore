@@ -1,0 +1,27 @@
+# Ignore compiled files
+/target/
+
+# Ignore Cargo.lock if it's not a library
+**/Cargo.lock
+
+# Ignore build artifacts
+**/debug/
+**/release/
+
+# Ignore generated files
+**/*.rs.bk
+
+# Ignore editor-specific files
+**/.vscode/
+**/.idea/
+**/*.swp
+**/*.swo
+# Ignore Rust-specific build files
+**/*.d
+**/*.json
+**/output
+**/root-output
+# Ignore other common files
+**/node_modules/
+**/dist/
+**/.DS_Store
