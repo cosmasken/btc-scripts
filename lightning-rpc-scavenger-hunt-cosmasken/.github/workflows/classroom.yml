@@ -1,0 +1,57 @@
+name: Autograding Tests
+on: [push, repository_dispatch, workflow_dispatch]
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Q1 - Preimage Check
+      id: q1-preimage-check
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q1 - Preimage Check
+        setup-command: ''
+        command: "./test/001-check_preimage.sh"
+        input: ''
+        expected-output: PASS
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+    - name: Q2 - Gossip Lookup
+      id: q2-gossip-lookup
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q2 - Gossip Lookup
+        setup-command: " ./test/download_lnd.sh"
+        command: "./submissions/002.sh"
+        input: ''
+        expected-output: '15000'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1   
+    - name: Q3 - Forwarding Check
+      id: q3-forwarding-check
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q3 - Forwarding Check
+        setup-command: ''
+        command: "./test/003-check_forward.sh"
+        input: ''
+        expected-output: PASS
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        Q1-PREIMAGE-CHECK_RESULTS: "${{steps.q1-preimage-check.outputs.result}}"
+        Q2-GOSSIP-LOOKUP_RESULTS: "${{steps.q2-gossip-lookup.outputs.result}}"
+        Q3-FORWARDING-CHECK_RESULTS: "${{steps.q3-forwarding-check.outputs.result}}"
+      with:
+        runners: q1-preimage-check,q2-gossip-lookup,q3-forwarding-check

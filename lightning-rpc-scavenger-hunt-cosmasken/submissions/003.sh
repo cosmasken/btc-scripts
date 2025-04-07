@@ -1,0 +1,3 @@
+route=$(lncli -n "signet" buildroute --amt 4793 --hops "03ebc7280ff486f94cee51cff45a0fc521e9fe2560c02563ab191552fa90d4017d,0324b10f41493935f35cd3b4c1131c94e8f83bfe66c6ebf842790e59e182076d30" --outgoing_chan_id "6243027022577666" --payment_addr "3d93a046e66cf4729498d8c4b3218af89f75dfa21a76851ad002790acc1197b4")
+echo $route
+echo ""

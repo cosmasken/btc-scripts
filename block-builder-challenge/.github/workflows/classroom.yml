@@ -1,0 +1,35 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Check if branch is 'main'
+      run: |
+        if [[ "${{ github.ref_name }}" != "main" ]]; then
+          echo "Only submissions committed to main branch will be tested and scored."
+          exit 1
+        fi
+      shell: bash
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Sanity Check
+      id: sanity-check
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Sanity Check
+        command: "rm -f solution/block.txt && bash solution/run_builder.sh && if [ ! -e solution/block.txt ]; then exit 1; fi"
+        timeout: 30
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        SANITY-CHECK_RESULTS: "${{steps.sanity-check.outputs.result}}"
+      with:
+        runners: sanity-check

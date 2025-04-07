@@ -1,0 +1,20 @@
+[package]
+name = "spend"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
+balance = {path = "../balance"}
+bitcoin_hashes = "0.16.0"
+env_logger = "0.11.6"
+hex = "0.4.3"
+ripemd = "0.1.3"
+secp256k1 = "0.30.0"
+sha2 = "0.10.8"
+log = "0.4.25"
+hex-literal = "0.4.1"
+serde_json = "1.0.137"
+anyhow = "1.0.95"
+k256 = "0.13.4"
+serde = "1.0.217"
