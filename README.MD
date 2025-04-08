@@ -15,7 +15,7 @@ This project aims to build a minimal, well-documented Rust SDK for Bitcoin on IC
 ### Key Features  
 
 - 🔍 **UTXO Parsing**: Efficient handling of unspent transaction outputs.  
-- 🔐 **P2PKH + Wrapped P2PKH (wP2PKH) Transaction Crafting**: Create standard and wrapped transactions.  
+- 🔐 **P2PKH + P2P2PKH Transaction Crafting**: Create standard  transactions.  
 - 🧑‍🤝‍🧑 **Multisig Support**: Build, sign, and verify M-of-N multisig transactions.  
 - 🔗 **ICP Bitcoin API Integration**: Interfaces for interacting with ICP's native Bitcoin capabilities.  
 - 📦 **No External Bitcoin Libraries**: Built entirely with native Rust cryptographic primitives.  
@@ -27,7 +27,7 @@ The SDK is designed to be modular, lightweight, and extensible.
 
 1. **Core Modules**:  
     - **UTXO Parser**: Extract and manage UTXO data.  
-    - **Transaction Builder**: Create P2PKH, wP2PKH, and multisig transactions.  
+    - **Transaction Builder**: Create P2PKH, P2WPKH,  transactions.  
     - **Signer**: Sign transactions using private keys.  
     - **Verifier**: Verify transaction signatures and multisig setups.  
 
